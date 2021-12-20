@@ -3443,7 +3443,7 @@ class PlayState extends MusicBeatState
 						diff = "";
 					}
 
-					Debug.logInfo('PlayState: Loading next story song ${PlayState.storyPlaylist[0]}-${diff}');
+					Debug.logInfo('PlayState: Loading next story song ${PlayState.storyPlaylist[0]}${diff}');
 
 					if (StringTools.replace(PlayState.storyPlaylist[0], " ", "-").toLowerCase() == 'eggnog')
 					{
