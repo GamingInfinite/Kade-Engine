@@ -3436,7 +3436,12 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					var diff:String = ["-easy", "", "-hard"][storyDifficulty];
+					var diff = '-${CoolUtil.difficultyFromInt(storyDifficulty).toLowerCase()}';
+
+					if (diff == "-normal")
+					{
+						diff = "";
+					}
 
 					Debug.logInfo('PlayState: Loading next story song ${PlayState.storyPlaylist[0]}-${diff}');
 
