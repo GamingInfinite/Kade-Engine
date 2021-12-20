@@ -1,5 +1,6 @@
 {
   "name": "RED SNOW",
   "weekCharacters": ["parents-christmas", "bf", "gf"],
-  "songs": ["cocoa", "eggnog", "winter-horrorland"]
+  "songs": ["cocoa", "eggnog", "winter-horrorland"],
+  "diffs": ["Easy", "Normal", "Hard"]
 }

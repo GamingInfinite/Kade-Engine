@@ -1,5 +1,6 @@
 {
     "name": "Tutorial",
     "weekCharacters": ["", "bf", "gf"],
-    "songs": ["tutorial"]
+    "songs": ["tutorial"],
+    "diffs": ["Easy", "Normal", "Hard"]
 }

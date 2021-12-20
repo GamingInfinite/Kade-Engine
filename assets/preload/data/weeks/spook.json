@@ -1,5 +1,6 @@
 {
   "name": "Spooky Month",
   "weekCharacters": ["spooky", "bf", "gf"],
-  "songs": ["spookeez", "south", "monster"]
+  "songs": ["spookeez", "south", "monster"],
+  "diffs": ["Easy", "Normal", "Hard"]
 }

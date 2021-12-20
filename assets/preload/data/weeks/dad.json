@@ -1,5 +1,6 @@
 {
   "name": "Daddy Dearest",
   "weekCharacters": ["dad", "bf", "gf"],
-  "songs": ["bopeebo", "fresh", "dadbattle"]
+  "songs": ["bopeebo", "fresh", "dadbattle"],
+  "diffs": ["Easy", "Normal", "Hard"]
 }

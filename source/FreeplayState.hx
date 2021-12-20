@@ -541,11 +541,6 @@ class FreeplayState extends MusicBeatState
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
-		if (!songs[curSelected].diffs.contains(CoolUtil.difficultyFromInt(curDifficulty)))
-		{
-			curDifficulty = CoolUtil.intFromDifficulty(songs[curSelected].diffs[0]);
-		}
-
 		curSelected += change;
 
 		if (curSelected < 0)
@@ -553,6 +548,12 @@ class FreeplayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 		// selector.y = (70 * curSelected) + 30;
+
+		if (!songs[curSelected].diffs.contains(CoolUtil.difficultyFromInt(curDifficulty)))
+		{
+			changeDiff();
+		}
+		// ^ Never ask the story behind this code.  Ever
 
 		// adjusting the highscore song name to be compatible (changeSelection)
 		// would read original scores if we didn't change packages

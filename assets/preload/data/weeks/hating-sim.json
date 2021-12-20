@@ -1,5 +1,6 @@
 {
   "name": "Hating Simulator ft. Moawling",
   "weekCharacters": ["senpai", "bf", "gf"],
-  "songs": ["senpai", "roses", "thorns"]
+  "songs": ["senpai", "roses", "thorns"],
+  "diffs": ["Easy", "Normal", "Hard"]
 }
