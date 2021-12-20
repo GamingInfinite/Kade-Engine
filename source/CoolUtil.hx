@@ -6,13 +6,22 @@ using StringTools;
 
 class CoolUtil
 {
-	public static var difficultyArray:Array<String> = ['Easy', "Normal", "Hard"];
+	public static var difficultyArray:Array<String> = [];
 
 	public static var daPixelZoom:Float = 6;
 
 	public static function difficultyFromInt(difficulty:Int):String
 	{
+		difficultyArray = []; // Jank Fix
+		difficultyStuff();
 		return difficultyArray[difficulty];
+	}
+
+	public static function intFromDifficulty(difficulty:String):Int
+	{
+		difficultyArray = []; // Jank Fix
+		difficultyStuff();
+		return difficultyArray.indexOf(difficulty);
 	}
 
 	public static function coolTextFile(path:String):Array<String>
@@ -47,5 +56,16 @@ class CoolUtil
 			dumbArray.push(i);
 		}
 		return dumbArray;
+	}
+
+	static function difficultyStuff()
+	{
+		var tempArr = CoolUtil.coolTextFile(Paths.txt('data/diffs'));
+		for (i in 0...tempArr.length)
+		{
+			var diffName = tempArr[i];
+
+			difficultyArray.push(diffName);
+		}
 	}
 }

@@ -32,10 +32,8 @@ class StoryMenuState extends MusicBeatState
 	var scoreText:FlxText;
 
 	static var weekData:Array<Dynamic> = [];
-
 	static var weekNames:Array<String> = [];
 	static var weekList:Array<String> = [];
-
 	static var weekCharacters:Array<Dynamic> = [];
 
 	static function weekStuff()
