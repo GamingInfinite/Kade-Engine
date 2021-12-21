@@ -189,7 +189,10 @@ class Song
 	{
 		var songData:SongData = cast jsonData.song;
 
-		songData.songId = songId;
+		if (songData.songId == null)
+		{
+			songData.songId = songId;
+		}
 
 		// Enforce default values for optional fields.
 		if (songData.validScore == null)
