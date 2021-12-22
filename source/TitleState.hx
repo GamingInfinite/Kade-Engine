@@ -58,7 +58,7 @@ class TitleState extends MusicBeatState
 
 		FlxG.autoPause = false;
 
-		FlxG.save.bind('funkin', 'ninjamuffin99');
+		FlxG.save.bind('void', 'gaminginfinite');
 
 		PlayerSettings.init();
 

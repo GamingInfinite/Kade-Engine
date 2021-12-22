@@ -2089,13 +2089,11 @@ class PlayState extends MusicBeatState
 		{
 			if (songStarted && !endingSong)
 			{
-				// Song ends abruptly on slow rate even with second condition being deleted,
-				// and if it's deleted on songs like cocoa then it would end without finishing instrumental fully,
-				// so no reason to delete it at all
-				if (unspawnNotes.length == 0 && notes.length == 0 && FlxG.sound.music.time / songMultiplier > (songLength - 100))
+				// Kade forgor that FlxG.sound.music.time is in milliseconds not seconds (and that he set songLength in seconds).
+				if (unspawnNotes.length == 0
+					&& notes.length == 0
+					&& (FlxG.sound.music.time / songMultiplier) >= ((songLength * 1000) - 100))
 				{
-					Debug.logTrace("we're fuckin ending the song ");
-
 					endingSong = true;
 					new FlxTimer().start(2, function(timer)
 					{
@@ -3336,8 +3334,8 @@ class PlayState extends MusicBeatState
 		if (SONG.validScore)
 		{
 			#if !switch
-			Highscore.saveScore(PlayState.SONG.songId, Math.round(songScore), storyDifficulty);
-			Highscore.saveCombo(PlayState.SONG.songId, Ratings.GenerateLetterRank(accuracy), storyDifficulty);
+			Highscore.saveScore(PlayState.SONG.songName.toLowerCase(), Math.round(songScore), storyDifficulty);
+			Highscore.saveCombo(PlayState.SONG.songName.toLowerCase(), Ratings.GenerateLetterRank(accuracy), storyDifficulty);
 			#end
 		}
 

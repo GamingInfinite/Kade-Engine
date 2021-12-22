@@ -61,17 +61,6 @@ class StoryMenuState extends MusicBeatState
 
 	public static var possibleDiffs:Array<String> = [];
 
-	static function difficultyStuff()
-	{
-		var tempArr = CoolUtil.coolTextFile(Paths.txt('data/diffs'));
-		for (i in 0...tempArr.length)
-		{
-			var diffName = tempArr[i];
-
-			possibleDiffs.push(diffName);
-		}
-	}
-
 	var curDifficulty:Int = 1;
 
 	public static var weekUnlocked:Array<Bool> = [];
@@ -113,7 +102,7 @@ class StoryMenuState extends MusicBeatState
 	override function create()
 	{
 		weekStuff();
-		difficultyStuff();
+		possibleDiffs = CoolUtil.getDiffArray();
 		weekUnlocked = unlockWeeks();
 
 		PlayState.currentSong = "bruh";

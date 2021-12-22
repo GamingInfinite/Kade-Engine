@@ -53,7 +53,7 @@ class Highscore
 	{
 		if (!FlxG.save.data.botplay)
 		{
-			var daWeek:String = formatSong('week' + week, diff);
+			var daWeek:String = formatSong('week' + CoolUtil.weekFromInt(week), diff);
 
 			if (songScores.exists(daWeek))
 			{
@@ -90,10 +90,7 @@ class Highscore
 	{
 		var daSong:String = song;
 
-		if (diff == 0)
-			daSong += '-easy';
-		else if (diff == 2)
-			daSong += '-hard';
+		daSong += '-${CoolUtil.difficultyFromInt(diff).toLowerCase()}';
 
 		return daSong;
 	}
@@ -133,10 +130,10 @@ class Highscore
 
 	public static function getWeekScore(week:Int, diff:Int):Int
 	{
-		if (!songScores.exists(formatSong('week' + week, diff)))
-			setScore(formatSong('week' + week, diff), 0);
+		if (!songScores.exists(formatSong('week' + CoolUtil.weekFromInt(week), diff)))
+			setScore(formatSong('week' + CoolUtil.weekFromInt(week), diff), 0);
 
-		return songScores.get(formatSong('week' + week, diff));
+		return songScores.get(formatSong('week' + CoolUtil.weekFromInt(week), diff));
 	}
 
 	public static function load():Void

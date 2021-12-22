@@ -57,20 +57,6 @@ class FreeplayState extends MusicBeatState
 
 	public static var possibleDiffs:Array<String> = [];
 
-	static function difficultyStuff()
-	{
-		var tempArr = CoolUtil.coolTextFile(Paths.txt('data/diffs'));
-
-		possibleDiffs = [];
-
-		for (i in 0...tempArr.length)
-		{
-			var diffName = tempArr[i];
-
-			possibleDiffs.push(diffName);
-		}
-	}
-
 	public static var list:Array<String> = [];
 
 	override function create()
@@ -80,7 +66,7 @@ class FreeplayState extends MusicBeatState
 
 		cached = false;
 
-		difficultyStuff();
+		possibleDiffs = CoolUtil.getDiffArray();
 		populateSongData();
 		PlayState.inDaPlay = false;
 		PlayState.currentSong = "bruh";
