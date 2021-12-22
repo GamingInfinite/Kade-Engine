@@ -1,3 +1,5 @@
-1.1.1;
-- Custom Difficulties
-- Small Bug Fixes
+1.1.2;
+- Saves have been reworked
+- Songs now play to completion
+- optimized some code.  exe is now marginally smaller.
+- Did you know that most of the game's size comes from .ogg and .png files, something that I can't control?
