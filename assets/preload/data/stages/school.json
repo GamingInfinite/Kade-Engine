@@ -1,0 +1,114 @@
+{
+  "objects": [
+    {
+      "name": "bgSky",
+      "posX": 0,
+      "posY": 0,
+      "scrollFactor": [0.1, 0.1],
+      "scale": [6],
+      "updateHitbox": true,
+      "frames": ["weeb/weebSky", "week6"]
+    },
+    {
+      "name": "bgSchool",
+      "posX": -200,
+      "posY": 0,
+      "scrollFactor": [0.6, 0.9],
+      "scale": [6],
+      "updateHitbox": true,
+      "frames": ["weeb/weebSchool", "week6"]
+    },
+    {
+      "name": "bgStreet",
+      "posX": -200,
+      "posY": 0,
+      "scrollFactor": [0.95, 0.95],
+      "scale": [6],
+      "updateHitbox": true,
+      "frames": ["weeb/weebStreet", "week6"]
+    },
+    {
+      "name": "fgTrees",
+      "posX": -30,
+      "posY": 130,
+      "scrollFactor": [0.9, 0.9],
+      "scale": [4.8],
+      "updateHitbox": true,
+      "frames": ["weeb/weebTreesBack", "week6"]
+    },
+    {
+      "name": "bgTrees",
+      "posX": -580,
+      "posY": -800,
+      "scrollFactor": [0.85, 0.85],
+      "frames": ["weeb/weebTrees", "week6"],
+      "scale": [5.1],
+      "updateHitbox": true,
+      "startingAnim": "treeLoop",
+      "animations": [
+        {
+          "name": "treeLoop",
+          "prefix": "TREE BG",
+          "fps": 12
+        }
+      ]
+    },
+    {
+      "name": "treeLeaves",
+      "posX": -200,
+      "posY": -40,
+      "scrollFactor": [0.85, 0.85],
+      "scale": [6],
+      "updateHitbox": true,
+      "frames": ["weeb/petals", "week6"],
+      "startingAnim": "leaves",
+      "animations": [
+        {
+          "name": "leaves",
+          "prefix": "PETALS ALL",
+          "fps": 24,
+          "looped": true
+        }
+      ]
+    },
+    {
+      "name": "bgGirls",
+      "posX": -100,
+      "posY": 190,
+      "isDistraction": true,
+      "scrollFactor": [0.9, 0.9],
+      "scale": [6],
+      "updateHitbox": true,
+      "frames": ["weeb/bgFreaks", "week6"],
+      "startingAnim": "danceLeft",
+      "animations": [
+        {
+          "name": "danceLeft",
+          "prefix": "BG girls group",
+          "indices": [14],
+          "fps": 24,
+          "looped": false
+        },
+        {
+          "name": "danceRight",
+          "prefix": "BG girls group",
+          "indices": [15, 16, 17, 18.19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+        },
+        {
+          "name": "danceLeft",
+          "prefix": "BG fangirls dissuaded",
+          "indices": [14],
+          "song": "roses",
+          "fps": 24,
+          "looped": false
+        },
+        {
+          "name": "danceRight",
+          "prefix": "BG fangirls dissuaded",
+          "song": "roses",
+          "indices": [15, 16, 17, 18.19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+        }
+      ]
+    }
+  ]
+}

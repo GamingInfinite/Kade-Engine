@@ -1,6 +1,7 @@
 {
   "song": {
     "song": "Dad Battle",
+    "stage": "stage",
     "bpm": 180.0,
     "needsVoices": true,
     "player1": "bf",

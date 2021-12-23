@@ -1,0 +1,27 @@
+{
+    "objects": [
+        {
+            "name": "halloweenBG",
+            "posX": -200,
+            "posY": -80,
+            "scale": [],
+            "scrollFactor": [],
+            "frames": ["halloween_bg", "week2"],
+            "startingAnim": "idle",
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix":"halloween bg0",
+                    "fps": 24,
+                    "looped": false
+                },
+                {
+                    "name": "lightning",
+                    "prefix": "halloweem bg lightning strike",
+                    "fps": 24,
+                    "looped": false
+                }
+            ]
+        }
+    ]
+}

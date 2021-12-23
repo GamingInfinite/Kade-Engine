@@ -2,6 +2,7 @@
   "name": "Daddy Dearest",
   "asset": "characters/DADDY_DEAREST",
   "barColor": "#AF66CE",
+  "barIcon": "dad",
   "startingAnim": "idle",
   "holdLength": 6.1,
   "camPos": [400, 0],

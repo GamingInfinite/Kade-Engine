@@ -2,6 +2,7 @@
   "name": "Monster",
   "asset": "characters/Monster_Assets",
   "barColor": "#F3FF6E",
+  "barIcon": "monster",
   "startingAnim": "idle",
   "animations": [
     {

@@ -2,6 +2,7 @@
   "name": "Girlfriend",
   "asset": "characters/GF_assets",
   "barColor": "#A5004D",
+  "barIcon": "gf",
   "startingAnim": "danceRight",
   "isDancing": true,
   "holdLength": 4.1,

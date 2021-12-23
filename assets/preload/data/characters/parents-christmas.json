@@ -2,6 +2,7 @@
   "name": "Parents (Christmas)",
   "asset": "characters/mom_dad_christmas_assets",
   "barColor": "#9A00F8",
+  "barIcon": "parents",
   "startingAnim": "idle",
   "animations": [
     {

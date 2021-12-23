@@ -12,7 +12,8 @@
         {
           "name": "idle",
           "prefix": "background 2",
-          "fps": 24
+          "fps": 24,
+          "looped": true
         }
       ]
     }

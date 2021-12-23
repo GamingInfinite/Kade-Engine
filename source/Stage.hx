@@ -10,6 +10,46 @@ import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 
+typedef StageData =
+{
+	var objects:Array<StageObject>;
+	var ?camZoom:Float;
+}
+
+typedef StageObject =
+{
+	var name:String;
+	var posX:Int;
+	var posY:Int;
+	var ?scale:Array<Float>;
+	var ?scrollFactor:Array<Float>;
+	var ?active:Bool;
+	var ?layInFront:Int;
+	var ?isDistraction:Bool;
+	var ?isMulti:Bool;
+	var ?multiNum:Int;
+	var ?multiDiff:Array<Int>;
+	var ?multiName:String;
+	var ?isMoving:Bool;
+	var ?isDancer:Bool;
+	var ?updateHitbox:Bool;
+	var ?visible:Bool;
+	var ?groupAdd:Bool;
+	var frames:Array<String>;
+	var startingAnim:String;
+	var animations:Array<ObjectAnim>;
+}
+
+typedef ObjectAnim =
+{
+	var name:String;
+	var prefix:String;
+	var ?indices:Array<Int>;
+	var ?fps:Int;
+	var ?looped:Bool;
+	var ?song:String;
+}
+
 class Stage extends MusicBeatState
 {
 	public var curStage:String = '';
@@ -26,6 +66,8 @@ class Stage extends MusicBeatState
 	public var layInFront:Array<Array<FlxSprite>> = [[], [], []]; // BG layering, format: first [0] - in front of GF, second [1] - in front of opponent, third [2] - in front of boyfriend(and technically also opponent since Haxe layering moment)
 	public var slowBacks:Map<Int,
 		Array<FlxSprite>> = []; // Change/add/remove backgrounds mid song! Format: "slowBacks[StepToBeActivated] = [Sprites,To,Be,Changed,Or,Added];"
+
+	var danceDir = false;
 
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
@@ -46,6 +88,157 @@ class Stage extends MusicBeatState
 		'schoolEvil' => ['gf-pixel' => [580, 430], 'bf-pixel' => [970, 670], 'spirit' => [-50, 200]]
 	];
 
+	public function generateStageObject(stageData:StageData, stageObjects:Array<StageObject>, ?groupToAdd:FlxTypedGroup<FlxSprite>)
+	{
+		if (stageData.camZoom != null && camZoom != 1.05)
+		{
+			camZoom = stageData.camZoom;
+		}
+		for (i in 0...stageObjects.length)
+		{
+			var obj = new FlxSprite(stageObjects[i].posX, stageObjects[i].posY);
+			var anims:Array<ObjectAnim> = cast stageObjects[i].animations;
+
+			var updateHitbox = stageObjects[i].updateHitbox == null ? false : stageObjects[i].updateHitbox;
+			var scale = stageObjects[i].scale == null ? [] : stageObjects[i].scale;
+			var scrollFactor = stageObjects[i].scrollFactor == null ? [] : stageObjects[i].scrollFactor;
+			var visible = stageObjects[i].visible == null ? true : stageObjects[i].visible;
+			var isDistraction = stageObjects[i].isDistraction == null ? false : stageObjects[i].isDistraction;
+			var isMulti = stageObjects[i].isMulti == null ? false : stageObjects[i].isMulti;
+			var groupAdd = stageObjects[i].groupAdd == null ? false : stageObjects[i].groupAdd;
+			if (isMulti)
+			{
+				var group = new FlxTypedGroup<FlxSprite>();
+
+				stageObjects[i].isMulti = false;
+				var objData:Array<StageObject> = [];
+				for (j in 0...stageObjects[i].multiNum)
+				{
+					var posX = cast stageObjects[i].posX + (stageObjects[i].multiDiff[0] * j);
+					var posY = cast stageObjects[i].posY + (stageObjects[i].multiDiff[1] * j);
+					var name = '${stageObjects[i].multiName}$j';
+					var frames = stageObjects[i].frames;
+					var startingAnim = stageObjects[i].startingAnim;
+					var newObj:StageObject = {
+						name: name,
+						posX: posX,
+						posY: posY,
+						animations: anims,
+						frames: frames,
+						groupAdd: groupAdd,
+						isDistraction: isDistraction,
+						startingAnim: startingAnim,
+						scrollFactor: scrollFactor
+					};
+					objData.push(newObj);
+				}
+				generateStageObject(stageData, objData, group);
+				swagGroup['${stageObjects[i].name}'] = group;
+				toAdd.push(group);
+				continue;
+			}
+
+			if (!(anims == null))
+			{
+				obj.frames = Paths.getSparrowAtlas(stageObjects[i].frames[0], stageObjects[i].frames[1]);
+				for (j in 0...anims.length)
+				{
+					var looped = anims[j].looped == null ? true : anims[j].looped;
+					var fps = anims[j].fps == null ? 24 : anims[j].fps;
+					var indices = anims[j].indices == null ? [] : anims[j].indices;
+					var song = anims[j].song == null ? "" : anims[j].song;
+
+					if (indices.length == 0)
+					{
+						if (song == "")
+						{
+							obj.animation.addByPrefix(anims[j].name, anims[j].prefix, fps, looped);
+						}
+						else
+						{
+							if (GameplayCustomizeState.freeplaySong == song)
+							{
+								obj.animation.addByPrefix(anims[j].name, anims[j].prefix, fps, looped);
+							}
+						}
+					}
+					else
+					{
+						if (song == "")
+						{
+							obj.animation.addByIndices(anims[j].name, anims[j].prefix, indices, "", fps, looped);
+						}
+						else
+						{
+							if (GameplayCustomizeState.freeplaySong == song)
+							{
+								obj.animation.addByIndices(anims[j].name, anims[j].prefix, indices, "", fps, looped);
+							}
+						}
+					}
+				}
+
+				obj.animation.play(stageObjects[i].startingAnim);
+			}
+			else
+			{ // jank. add failsafe later
+				obj = new FlxSprite(stageObjects[i].posX,
+					stageObjects[i].posY).loadGraphic(Paths.loadImage(stageObjects[i].frames[0], stageObjects[i].frames[1]));
+				obj.active = stageObjects[i].active == null ? true : stageObjects[i].active;
+			}
+
+			if (!(scale.length == 0))
+			{
+				switch (scale.length)
+				{
+					case 1:
+						{
+							obj.setGraphicSize(Std.int(obj.width * scale[0]));
+						}
+					case 2:
+						{
+							obj.scale.set(scale[0], scale[1]);
+						}
+				}
+			}
+
+			if (!(scrollFactor.length == 0))
+			{
+				obj.scrollFactor.set(scrollFactor[0], scrollFactor[1]);
+			}
+
+			if (!(stageObjects[i].layInFront == null))
+			{
+				layInFront[stageObjects[i].layInFront].push(obj);
+			}
+			else if (groupAdd)
+			{
+				groupToAdd.add(obj);
+			}
+			else
+			{
+				toAdd.push(obj);
+			}
+
+			if (updateHitbox)
+			{
+				obj.updateHitbox();
+			}
+
+			obj.visible = visible;
+
+			if (isDistraction)
+			{
+				if (FlxG.save.data.distractions)
+				{
+					swagBacks['${stageObjects[i].name}'] = obj;
+					continue;
+				}
+			}
+			swagBacks['${stageObjects[i].name}'] = obj;
+		}
+	}
+
 	public function new(daStage:String)
 	{
 		super();
@@ -54,21 +247,20 @@ class Stage extends MusicBeatState
 		if (PlayStateChangeables.Optimize)
 			return;
 
+		if (Paths.doesTextAssetExist(Paths.json('stages/$curStage')))
+		{
+			var jsonData = Paths.loadJSON('stages/$curStage');
+			var stageData:StageData = cast jsonData;
+
+			var stageObjects:Array<StageObject> = cast stageData.objects;
+			Debug.logInfo('Generating Stage: stages/$curStage');
+
+			generateStageObject(stageData, stageObjects);
+			return;
+		}
+
 		switch (daStage)
 		{
-			case 'halloween':
-				{
-					var hallowTex = Paths.getSparrowAtlas('halloween_bg', 'week2');
-
-					var halloweenBG = new FlxSprite(-200, -80);
-					halloweenBG.frames = hallowTex;
-					halloweenBG.animation.addByPrefix('idle', 'halloweem bg0');
-					halloweenBG.animation.addByPrefix('lightning', 'halloweem bg lightning strike', 24, false);
-					halloweenBG.animation.play('idle');
-					halloweenBG.antialiasing = FlxG.save.data.antialiasing;
-					swagBacks['halloweenBG'] = halloweenBG;
-					toAdd.push(halloweenBG);
-				}
 			case 'philly':
 				{
 					var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.loadImage('philly/sky', 'week3'));
@@ -125,69 +317,6 @@ class Stage extends MusicBeatState
 					street.antialiasing = FlxG.save.data.antialiasing;
 					swagBacks['street'] = street;
 					toAdd.push(street);
-				}
-			case 'limo':
-				{
-					camZoom = 0.90;
-
-					var skyBG:FlxSprite = new FlxSprite(-120, -50).loadGraphic(Paths.loadImage('limo/limoSunset', 'week4'));
-					skyBG.scrollFactor.set(0.1, 0.1);
-					skyBG.antialiasing = FlxG.save.data.antialiasing;
-					swagBacks['skyBG'] = skyBG;
-					toAdd.push(skyBG);
-
-					var bgLimo:FlxSprite = new FlxSprite(-200, 480);
-					bgLimo.frames = Paths.getSparrowAtlas('limo/bgLimo', 'week4');
-					bgLimo.animation.addByPrefix('drive', "background limo pink", 24);
-					bgLimo.animation.play('drive');
-					bgLimo.scrollFactor.set(0.4, 0.4);
-					bgLimo.antialiasing = FlxG.save.data.antialiasing;
-					swagBacks['bgLimo'] = bgLimo;
-					toAdd.push(bgLimo);
-
-					var fastCar:FlxSprite;
-					fastCar = new FlxSprite(-300, 160).loadGraphic(Paths.loadImage('limo/fastCarLol', 'week4'));
-					fastCar.antialiasing = FlxG.save.data.antialiasing;
-					fastCar.visible = false;
-
-					if (FlxG.save.data.distractions)
-					{
-						var grpLimoDancers = new FlxTypedGroup<BackgroundDancer>();
-						swagGroup['grpLimoDancers'] = grpLimoDancers;
-						toAdd.push(grpLimoDancers);
-
-						for (i in 0...5)
-						{
-							var dancer:BackgroundDancer = new BackgroundDancer((370 * i) + 130, bgLimo.y - 400);
-							dancer.scrollFactor.set(0.4, 0.4);
-							grpLimoDancers.add(dancer);
-							swagBacks['dancer' + i] = dancer;
-						}
-
-						swagBacks['fastCar'] = fastCar;
-						layInFront[2].push(fastCar);
-						resetFastCar();
-					}
-
-					var overlayShit:FlxSprite = new FlxSprite(-500, -600).loadGraphic(Paths.loadImage('limo/limoOverlay', 'week4'));
-					overlayShit.alpha = 0.5;
-					// add(overlayShit);
-
-					// var shaderBullshit = new BlendModeEffect(new OverlayShader(), FlxColor.RED);
-
-					// FlxG.camera.setFilters([new ShaderFilter(cast shaderBullshit.shader)]);
-
-					// overlayShit.shader = shaderBullshit;
-
-					var limoTex = Paths.getSparrowAtlas('limo/limoDrive', 'week4');
-
-					var limo = new FlxSprite(-120, 550);
-					limo.frames = limoTex;
-					limo.animation.addByPrefix('drive', "Limo stage", 24);
-					limo.animation.play('drive');
-					limo.antialiasing = FlxG.save.data.antialiasing;
-					layInFront[0].push(limo);
-					swagBacks['limo'] = limo;
 				}
 			case 'mall':
 				{
@@ -361,61 +490,6 @@ class Stage extends MusicBeatState
 						toAdd.push(bgGirls);
 					}
 				}
-			case 'schoolEvil':
-				{
-					var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 3, 2);
-					var waveEffectFG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 5, 2);
-
-					var posX = 400;
-					var posY = 200;
-
-					var bg:FlxSprite = new FlxSprite(posX, posY);
-					bg.frames = Paths.getSparrowAtlas('weeb/animatedEvilSchool', 'week6');
-					bg.animation.addByPrefix('idle', 'background 2', 24);
-					bg.animation.play('idle');
-					bg.scrollFactor.set(0.8, 0.9);
-					bg.scale.set(6, 6);
-					swagBacks['bg'] = bg;
-					toAdd.push(bg);
-
-					/* 
-						var bg:FlxSprite = new FlxSprite(posX, posY).loadGraphic(Paths.loadImage('weeb/evilSchoolBG'));
-						bg.scale.set(6, 6);
-						// bg.setGraphicSize(Std.int(bg.width * 6));
-						// bg.updateHitbox();
-						add(bg);
-						var fg:FlxSprite = new FlxSprite(posX, posY).loadGraphic(Paths.loadImage('weeb/evilSchoolFG'));
-						fg.scale.set(6, 6);
-						// fg.setGraphicSize(Std.int(fg.width * 6));
-						// fg.updateHitbox();
-						add(fg);
-						wiggleShit.effectType = WiggleEffectType.DREAMY;
-						wiggleShit.waveAmplitude = 0.01;
-						wiggleShit.waveFrequency = 60;
-						wiggleShit.waveSpeed = 0.8;
-					 */
-
-					// bg.shader = wiggleShit.shader;
-					// fg.shader = wiggleShit.shader;
-
-					/* 
-						var waveSprite = new FlxEffectSprite(bg, [waveEffectBG]);
-						var waveSpriteFG = new FlxEffectSprite(fg, [waveEffectFG]);
-						// Using scale since setGraphicSize() doesnt work???
-						waveSprite.scale.set(6, 6);
-						waveSpriteFG.scale.set(6, 6);
-						waveSprite.setPosition(posX, posY);
-						waveSpriteFG.setPosition(posX, posY);
-						waveSprite.scrollFactor.set(0.7, 0.8);
-						waveSpriteFG.scrollFactor.set(0.9, 0.8);
-						// waveSprite.setGraphicSize(Std.int(waveSprite.width * 6));
-						// waveSprite.updateHitbox();
-						// waveSpriteFG.setGraphicSize(Std.int(fg.width * 6));
-						// waveSpriteFG.updateHitbox();
-						add(waveSprite);
-						add(waveSpriteFG);
-					 */
-				}
 			default:
 				{
 					camZoom = 0.9;
@@ -537,14 +611,29 @@ class Stage extends MusicBeatState
 				case 'school':
 					if (FlxG.save.data.distractions)
 					{
-						swagBacks['bgGirls'].dance();
+						dance(!danceDir);
+
+						var dancer = swagBacks['bgGirls'];
+
+						if (danceDir)
+							dancer.animation.play('danceRight', true);
+						else
+							dancer.animation.play('danceLeft', true);
 					}
 				case 'limo':
 					if (FlxG.save.data.distractions)
 					{
-						swagGroup['grpLimoDancers'].forEach(function(dancer:BackgroundDancer)
+						dance(!danceDir);
+						swagGroup['grpLimoDancers'].forEach(function(dancer:FlxSprite)
 						{
-							dancer.dance();
+							if (danceDir)
+							{
+								dancer.animation.play('danceRight', true);
+							}
+							else
+							{
+								dancer.animation.play('danceLeft', true);
+							}
 						});
 
 						if (FlxG.random.bool(10) && fastCarCanDrive)
@@ -607,6 +696,11 @@ class Stage extends MusicBeatState
 			GameplayCustomizeState.boyfriend.playAnim('scared', true);
 			GameplayCustomizeState.gf.playAnim('scared', true);
 		}
+	}
+
+	public function dance(bool:Bool)
+	{
+		danceDir = bool;
 	}
 
 	var trainMoving:Bool = false;
@@ -692,6 +786,19 @@ class Stage extends MusicBeatState
 			fastCar.y = FlxG.random.int(140, 250);
 			fastCar.velocity.x = 0;
 			fastCar.visible = false;
+			fastCarCanDrive = true;
+		}
+	}
+
+	function resetMoveObj(posX:Int, posY:Array<Int>):Void
+	{
+		if (FlxG.save.data.distractions)
+		{
+			var fastCar = swagBacks['fastCar'];
+			fastCar.x = posX;
+			fastCar.y = FlxG.random.int(posY[0], posY[1]);
+			fastCar.velocity.x = 0;
+			fastCar.visible = !(fastCar.visible);
 			fastCarCanDrive = true;
 		}
 	}

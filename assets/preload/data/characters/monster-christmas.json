@@ -2,6 +2,7 @@
   "name": "Monster (Christmas)",
   "asset": "characters/monsterChristmas",
   "barColor": "#F3FF6E",
+  "barIcon": "monster",
   "startingAnim": "idle",
   "animations": [
     {

@@ -498,34 +498,7 @@ class PlayState extends MusicBeatState
 		// If the stage isn't specified in the chart, we use the story week value.
 		if (SONG.stage == null)
 		{
-			switch (storyWeek)
-			{
-				case 2:
-					stageCheck = 'halloween';
-				case 3:
-					stageCheck = 'philly';
-				case 4:
-					stageCheck = 'limo';
-				case 5:
-					if (SONG.songId == 'winter-horrorland')
-					{
-						stageCheck = 'mallEvil';
-					}
-					else
-					{
-						stageCheck = 'mall';
-					}
-				case 6:
-					if (SONG.songId == 'thorns')
-					{
-						stageCheck = 'schoolEvil';
-					}
-					else
-					{
-						stageCheck = 'school';
-					}
-					// i should check if its stage (but this is when none is found in chart anyway)
-			}
+			stageCheck = "stage";
 		}
 		else
 		{
@@ -939,10 +912,10 @@ class PlayState extends MusicBeatState
 
 		addedBotplay = PlayStateChangeables.botPlay;
 
-		iconP1 = new HealthIcon(boyfriend.curCharacter, true);
+		iconP1 = new HealthIcon(boyfriend.barIcon, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 
-		iconP2 = new HealthIcon(dad.curCharacter, false);
+		iconP2 = new HealthIcon(dad.barIcon, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 
 		if (FlxG.save.data.healthBar)

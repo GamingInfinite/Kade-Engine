@@ -37,9 +37,6 @@ class HealthIcon extends FlxSprite
 
 	public function changeIcon(char:String)
 	{
-		if (char != 'bf-pixel' && char != 'bf-old')
-			char = char.split("-")[0];
-
 		if (!OpenFlAssets.exists(Paths.image('icons/icon-' + char)))
 			char = 'face';
 

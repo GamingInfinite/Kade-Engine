@@ -2,6 +2,7 @@
   "name": "Boyfriend",
   "asset": "characters/BOYFRIEND",
   "barColor": "#31B0D1",
+  "barIcon": "bf",
   "flipX": true,
   "startingAnim": "idle",
   "animations": [

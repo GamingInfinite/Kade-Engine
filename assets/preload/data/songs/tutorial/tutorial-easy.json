@@ -1,6 +1,7 @@
 {
   "song": {
     "song": "Tutorial",
+    "stage": "stage",
     "notes": [
       {
         "mustHitSection": true,

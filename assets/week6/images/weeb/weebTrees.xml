@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagepath="weebTREE BG.png">
+    <SubTexture name="TREE BG0000" x="0" y="0" width="512" height="512"/>
+    <SubTexture name="TREE BG0001" x="513" y="0" width="512" height="512"/>
+    <SubTexture name="TREE BG0002" x="1539" y="1026" width="512" height="512"/>
+    <SubTexture name="TREE BG0003" x="2052" y="513" width="512" height="512"/>
+    <SubTexture name="TREE BG0004" x="2565" y="0" width="512" height="512"/>
+    <SubTexture name="TREE BG0005" x="3078" y="0" width="512" height="512"/>
+    <SubTexture name="TREE BG0006" x="2565" y="513" width="512" height="512"/>
+    <SubTexture name="TREE BG0007" x="2052" y="1026" width="512" height="512"/>
+    <SubTexture name="TREE BG0008" x="2565" y="1026" width="512" height="512"/>
+    <SubTexture name="TREE BG0009" x="3078" y="513" width="512" height="512"/>
+    <SubTexture name="TREE BG0010" x="1026" y="0" width="512" height="512"/>
+    <SubTexture name="TREE BG0011" x="0" y="513" width="512" height="512"/>
+    <SubTexture name="TREE BG0012" x="513" y="513" width="512" height="512"/>
+    <SubTexture name="TREE BG0013" x="0" y="1026" width="512" height="512"/>
+    <SubTexture name="TREE BG0014" x="513" y="1026" width="512" height="512"/>
+    <SubTexture name="TREE BG0015" x="1026" y="513" width="512" height="512"/>
+    <SubTexture name="TREE BG0016" x="1026" y="1026" width="512" height="512"/>
+    <SubTexture name="TREE BG0017" x="1539" y="0" width="512" height="512"/>
+    <SubTexture name="TREE BG0018" x="1539" y="513" width="512" height="512"/>
+    <SubTexture name="TREE BG0019" x="2052" y="0" width="512" height="512"/>
+</TextureAtlas>

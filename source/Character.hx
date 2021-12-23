@@ -28,6 +28,7 @@ class Character extends FlxSprite
 	public var hasTrail:Bool;
 	public var isDancing:Bool;
 	public var holdLength:Float;
+	public var barIcon:String;
 	public var charPos:Array<Int>;
 	public var camPos:Array<Int>;
 	public var camFollow:Array<Int>;
@@ -122,6 +123,7 @@ class Character extends FlxSprite
 		this.isDancing = data.isDancing == null ? false : data.isDancing;
 		this.charPos = data.charPos == null ? [0, 0] : data.charPos;
 		this.camPos = data.camPos == null ? [0, 0] : data.camPos;
+		this.barIcon = data.barIcon == null ? 'face' : data.barIcon;
 		this.camFollow = data.camFollow == null ? [0, 0] : data.camFollow;
 		this.holdLength = data.holdLength == null ? 4 : data.holdLength;
 
@@ -275,6 +277,7 @@ typedef CharacterData =
 	 */
 	var barColor:String;
 
+	var barIcon:String;
 	var animations:Array<AnimationData>;
 
 	/**

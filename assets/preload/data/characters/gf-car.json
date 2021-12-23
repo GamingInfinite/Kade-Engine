@@ -2,6 +2,7 @@
   "name": "Girlfriend (Car)",
   "asset": "characters/gfCar",
   "barColor": "#A5004D",
+  "barIcon": "gf",
   "startingAnim": "danceRight",
   "isDancing": true,
   "replacesGF": true,

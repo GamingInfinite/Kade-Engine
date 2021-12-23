@@ -2,6 +2,7 @@
   "name": "Mommy Mearest",
   "asset": "characters/Mom_Assets",
   "barColor": "#D8558E",
+  "barIcon": "mom",
   "startingAnim": "idle",
   "camFollow": [0, 100],
   "animations": [

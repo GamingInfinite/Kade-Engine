@@ -2,6 +2,7 @@
   "name": "Boyfriend (Car)",
   "asset": "characters/bfCar",
   "barColor": "#31B0D1",
+  "barIcon": "bf",
   "flipX": true,
   "startingAnim": "idle",
   "animations": [

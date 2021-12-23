@@ -2,6 +2,7 @@
   "name": "Spirit",
   "asset": "characters/spirit",
   "barColor": "#FF3C6E",
+  "barIcon": "spirit",
   "scale": 6,
   "antialiasing": false,
   "usePackerAtlas": true,

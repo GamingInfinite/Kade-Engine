@@ -4,6 +4,7 @@
     "bpm": 120.0,
     "needsVoices": true,
     "player1": "bf",
+    "stage": "stage",
     "player2": "dad",
     "speed": 1.3,
     "notes": [

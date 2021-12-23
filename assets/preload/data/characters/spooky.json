@@ -2,6 +2,7 @@
   "name": "Skid and Pump",
   "asset": "characters/spooky_kids_assets",
   "barColor": "#D57E00",
+  "barIcon": "spooky",
   "startingAnim": "danceRight",
   "isDancing": true,
   "holdLength": 4.1,

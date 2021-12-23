@@ -2,6 +2,7 @@
   "name": "Boyfriend (Pixel Day) (Game Over)",
   "asset": "characters/bfPixelsDEAD",
   "barColor": "#31B0D1",
+  "barIcon": "bf-pixel",
   "flipX": true,
   "scale": 6,
   "antialiasing": false,

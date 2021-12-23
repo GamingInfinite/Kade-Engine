@@ -1,0 +1,83 @@
+{
+  "camZoom": 0.9,
+  "objects": [
+    {
+      "name": "skyBG",
+      "posX": -120,
+      "posY": -50,
+      "scrollFactor": [0.1, 0.1],
+      "frames": ["limo/limoSunset", "week4"]
+    },
+    {
+      "name": "bgLimo",
+      "posX": -200,
+      "posY": 480,
+      "scrollFactor": [0.4, 0.4],
+      "startingAnim": "drive",
+      "frames": ["limo/bgLimo", "week4"],
+      "animations": [
+        {
+          "name": "drive",
+          "prefix": "background limo pink",
+          "fps": 24
+        }
+      ]
+    },
+    {
+      "name": "limo",
+      "posX": -120,
+      "posY": 550,
+      "layInFront": 0,
+      "startingAnim": "drive",
+      "frames": ["limo/limoDrive", "week4"],
+      "animations": [
+        {
+          "name": "drive",
+          "prefix": "Limo stage",
+          "fps": 24
+        }
+      ]
+    },
+    {
+      "name": "fastCar",
+      "visible": false,
+      "posX": -300,
+      "posY": 160,
+      "isDistraction": true,
+      "isMoving": true,
+      "layInFront": 2,
+      "frames": ["limo/fastCarLol", "week4"]
+    },
+    {
+      "name": "grpLimoDancers",
+      "posX": 130,
+      "posY": 80,
+      "isMulti": true,
+      "groupAdd": true,
+      "multiNum": 5,
+      "multiName": "dancer",
+      "multiDiff": [370, 0],
+      "scrollFactor": [0.4, 0.4],
+      "startingAnim": "danceLeft",
+      "frames": ["limo/limoDancer", "week4"],
+      "animations": [
+        {
+          "name": "danceLeft",
+          "prefix": "bg dancer sketch PINK",
+          "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "fps": 24,
+          "looped": false
+        },
+        {
+          "name": "danceRight",
+          "prefix": "bg dancer sketch PINK",
+          "indices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "fps": 24,
+          "looped": false
+        }
+      ]
+    }
+  ]
+}

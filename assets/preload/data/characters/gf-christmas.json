@@ -2,6 +2,7 @@
   "name": "Girlfriend (Christmas)",
   "asset": "characters/gfChristmas",
   "barColor": "#A5004D",
+  "barIcon": "gf",
   "startingAnim": "danceRight",
   "isDancing": true,
   "holdLength": 4.1,

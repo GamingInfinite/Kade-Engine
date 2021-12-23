@@ -2,6 +2,7 @@
   "name": "Senpai",
   "asset": "characters/senpai",
   "barColor": "#FFAA6F",
+  "barIcon": "senpai",
   "scale": 6,
   "antialiasing": false,
   "startingAnim": "idle",
