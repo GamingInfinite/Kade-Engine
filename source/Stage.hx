@@ -22,6 +22,7 @@ typedef StageObject =
 	var posX:Int;
 	var posY:Int;
 	var ?scale:Array<Float>;
+	var ?song:String;
 	var ?scrollFactor:Array<Float>;
 	var ?active:Bool;
 	var ?layInFront:Int;
@@ -107,7 +108,9 @@ class Stage extends MusicBeatState
 			var isDistraction = stageObjects[i].isDistraction == null ? false : stageObjects[i].isDistraction;
 			var isMulti = stageObjects[i].isMulti == null ? false : stageObjects[i].isMulti;
 			var isAnimated = stageObjects[i].isAnimated == null ? false : stageObjects[i].isAnimated;
+			var isDancer = stageObjects[i].isDancer == null ? false : stageObjects[i].isDancer;
 			var groupAdd = stageObjects[i].groupAdd == null ? false : stageObjects[i].groupAdd;
+			var objSong = stageObjects[i].song == null ? "" : stageObjects[i].song;
 			if (isMulti)
 			{
 				var group = new FlxTypedGroup<FlxSprite>();
@@ -129,6 +132,7 @@ class Stage extends MusicBeatState
 						frames: frames,
 						groupAdd: groupAdd,
 						isDistraction: isDistraction,
+						isDancer: isDancer,
 						startingAnim: startingAnim,
 						scrollFactor: scrollFactor
 					};
@@ -222,6 +226,21 @@ class Stage extends MusicBeatState
 				toAdd.push(obj);
 			}
 
+			if (isDancer)
+			{
+				if (!swagGroup.exists("dancers"))
+				{
+					var group = new FlxTypedGroup<FlxSprite>();
+
+					group.add(obj);
+					swagGroup["dancers"] = group;
+				}
+				else
+				{
+					swagGroup["dancers"].add(obj);
+				}
+			}
+
 			if (isAnimated)
 			{
 				animatedBacks.push(obj);
@@ -236,13 +255,40 @@ class Stage extends MusicBeatState
 
 			if (isDistraction)
 			{
-				if (FlxG.save.data.distractions)
+				if (objSong == "")
 				{
-					swagBacks['${stageObjects[i].name}'] = obj;
-					continue;
+					if (FlxG.save.data.distractions)
+					{
+						swagBacks['${stageObjects[i].name}'] = obj;
+						continue;
+					}
+				}
+				else
+				{
+					if (GameplayCustomizeState.freeplaySong == objSong)
+					{
+						if (FlxG.save.data.distractions)
+						{
+							swagBacks['${stageObjects[i].name}'] = obj;
+							continue;
+						}
+					}
 				}
 			}
-			swagBacks['${stageObjects[i].name}'] = obj;
+			else
+			{
+				if (objSong == "")
+				{
+					swagBacks['${stageObjects[i].name}'] = obj;
+				}
+				else
+				{
+					if (GameplayCustomizeState.freeplaySong == objSong)
+					{
+						swagBacks['${stageObjects[i].name}'] = obj;
+					}
+				}
+			}
 		}
 	}
 
@@ -443,34 +489,9 @@ class Stage extends MusicBeatState
 							trace('spooky');
 						}
 					}
-				case 'school':
-					if (FlxG.save.data.distractions)
-					{
-						dance(!danceDir);
-
-						var dancer = swagBacks['bgGirls'];
-
-						if (danceDir)
-							dancer.animation.play('danceRight', true);
-						else
-							dancer.animation.play('danceLeft', true);
-					}
 				case 'limo':
 					if (FlxG.save.data.distractions)
 					{
-						dance(!danceDir);
-						swagGroup['grpLimoDancers'].forEach(function(dancer:FlxSprite)
-						{
-							if (danceDir)
-							{
-								dancer.animation.play('danceRight', true);
-							}
-							else
-							{
-								dancer.animation.play('danceLeft', true);
-							}
-						});
-
 						if (FlxG.random.bool(10) && fastCarCanDrive)
 							fastCarDrive();
 					}
@@ -504,6 +525,23 @@ class Stage extends MusicBeatState
 							trace('train');
 						}
 					}
+			}
+
+			if (FlxG.save.data.distractions)
+			{
+				dance(!danceDir);
+
+				swagGroup['dancers'].forEach(function(dancer:FlxSprite)
+				{
+					if (danceDir)
+					{
+						dancer.animation.play('danceRight', true);
+					}
+					else
+					{
+						dancer.animation.play('danceLeft', true);
+					}
+				});
 			}
 		}
 	}

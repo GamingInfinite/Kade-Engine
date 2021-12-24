@@ -53,6 +53,8 @@
       "posX": 130,
       "posY": 80,
       "isMulti": true,
+      "isDistraction": true,
+      "isDancer": true,
       "groupAdd": true,
       "multiNum": 5,
       "multiName": "dancer",

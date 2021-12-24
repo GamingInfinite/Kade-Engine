@@ -76,6 +76,7 @@
       "posX": -100,
       "posY": 190,
       "isDistraction": true,
+      "isDancer": true,
       "scrollFactor": [0.9, 0.9],
       "scale": [6],
       "updateHitbox": true,
