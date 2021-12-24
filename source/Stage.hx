@@ -224,34 +224,6 @@ class Stage extends MusicBeatState
 				obj.scrollFactor.set(scrollFactor[0], scrollFactor[1]);
 			}
 
-			if (!(stageObjects[i].layInFront == null))
-			{
-				layInFront[stageObjects[i].layInFront].push(obj);
-			}
-			else if (groupAdd)
-			{
-				groupToAdd.add(obj);
-			}
-			else
-			{
-				toAdd.push(obj);
-			}
-
-			if (isDancer)
-			{
-				if (!swagGroup.exists("dancers"))
-				{
-					var group = new FlxTypedGroup<FlxSprite>();
-
-					group.add(obj);
-					swagGroup["dancers"] = group;
-				}
-				else
-				{
-					swagGroup["dancers"].add(obj);
-				}
-			}
-
 			if (isAnimated)
 			{
 				animatedBacks.push(obj);
@@ -268,6 +240,33 @@ class Stage extends MusicBeatState
 			{
 				if (objSong == "")
 				{
+					if (!(stageObjects[i].layInFront == null))
+					{
+						layInFront[stageObjects[i].layInFront].push(obj);
+					}
+					else if (groupAdd)
+					{
+						groupToAdd.add(obj);
+					}
+					else
+					{
+						toAdd.push(obj);
+					}
+
+					if (isDancer)
+					{
+						if (!swagGroup.exists("dancers"))
+						{
+							var group = new FlxTypedGroup<FlxSprite>();
+
+							group.add(obj);
+							swagGroup["dancers"] = group;
+						}
+						else
+						{
+							swagGroup["dancers"].add(obj);
+						}
+					}
 					if (FlxG.save.data.distractions)
 					{
 						swagBacks['${stageObjects[i].name}'] = obj;
@@ -278,6 +277,33 @@ class Stage extends MusicBeatState
 				{
 					if (GameplayCustomizeState.freeplaySong == objSong)
 					{
+						if (!(stageObjects[i].layInFront == null))
+						{
+							layInFront[stageObjects[i].layInFront].push(obj);
+						}
+						else if (groupAdd)
+						{
+							groupToAdd.add(obj);
+						}
+						else
+						{
+							toAdd.push(obj);
+						}
+
+						if (isDancer)
+						{
+							if (!swagGroup.exists("dancers"))
+							{
+								var group = new FlxTypedGroup<FlxSprite>();
+
+								group.add(obj);
+								swagGroup["dancers"] = group;
+							}
+							else
+							{
+								swagGroup["dancers"].add(obj);
+							}
+						}
 						if (FlxG.save.data.distractions)
 						{
 							swagBacks['${stageObjects[i].name}'] = obj;
@@ -290,12 +316,66 @@ class Stage extends MusicBeatState
 			{
 				if (objSong == "")
 				{
+					if (!(stageObjects[i].layInFront == null))
+					{
+						layInFront[stageObjects[i].layInFront].push(obj);
+					}
+					else if (groupAdd)
+					{
+						groupToAdd.add(obj);
+					}
+					else
+					{
+						toAdd.push(obj);
+					}
+
+					if (isDancer)
+					{
+						if (!swagGroup.exists("dancers"))
+						{
+							var group = new FlxTypedGroup<FlxSprite>();
+
+							group.add(obj);
+							swagGroup["dancers"] = group;
+						}
+						else
+						{
+							swagGroup["dancers"].add(obj);
+						}
+					}
 					swagBacks['${stageObjects[i].name}'] = obj;
 				}
 				else
 				{
 					if (GameplayCustomizeState.freeplaySong == objSong)
 					{
+						if (!(stageObjects[i].layInFront == null))
+						{
+							layInFront[stageObjects[i].layInFront].push(obj);
+						}
+						else if (groupAdd)
+						{
+							groupToAdd.add(obj);
+						}
+						else
+						{
+							toAdd.push(obj);
+						}
+
+						if (isDancer)
+						{
+							if (!swagGroup.exists("dancers"))
+							{
+								var group = new FlxTypedGroup<FlxSprite>();
+
+								group.add(obj);
+								swagGroup["dancers"] = group;
+							}
+							else
+							{
+								swagGroup["dancers"].add(obj);
+							}
+						}
 						swagBacks['${stageObjects[i].name}'] = obj;
 					}
 				}
