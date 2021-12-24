@@ -1,0 +1,27 @@
+{
+    "objects": [
+        {
+            "name": "bg",
+            "posX": -400,
+            "posY": -500,
+            "scrollFactor": [0.2, 0.2],
+            "active": false,
+            "scale": [0.8],
+            "frames": ["christmas/evilBG", "week5"],
+            "updateHitbox": true
+        },
+        {
+            "name": "evilTree",
+            "posX": 300,
+            "posY": -300,
+            "scrollFactor":[0.2, 0.2],
+            "frames": ["christmas/evilTree", "week5"]
+        },
+        {
+            "name": "evilSnow",
+            "posX": -200,
+            "posY": 700,
+            "frames":["christmas/evilSnow", "week5"]
+        }
+    ]
+}

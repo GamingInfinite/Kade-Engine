@@ -32,6 +32,7 @@ typedef StageObject =
 	var ?multiName:String;
 	var ?isMoving:Bool;
 	var ?isDancer:Bool;
+	var ?isAnimated:Bool;
 	var ?updateHitbox:Bool;
 	var ?visible:Bool;
 	var ?groupAdd:Bool;
@@ -105,6 +106,7 @@ class Stage extends MusicBeatState
 			var visible = stageObjects[i].visible == null ? true : stageObjects[i].visible;
 			var isDistraction = stageObjects[i].isDistraction == null ? false : stageObjects[i].isDistraction;
 			var isMulti = stageObjects[i].isMulti == null ? false : stageObjects[i].isMulti;
+			var isAnimated = stageObjects[i].isAnimated == null ? false : stageObjects[i].isAnimated;
 			var groupAdd = stageObjects[i].groupAdd == null ? false : stageObjects[i].groupAdd;
 			if (isMulti)
 			{
@@ -220,6 +222,11 @@ class Stage extends MusicBeatState
 				toAdd.push(obj);
 			}
 
+			if (isAnimated)
+			{
+				animatedBacks.push(obj);
+			}
+
 			if (updateHitbox)
 			{
 				obj.updateHitbox();
@@ -317,101 +324,6 @@ class Stage extends MusicBeatState
 					street.antialiasing = FlxG.save.data.antialiasing;
 					swagBacks['street'] = street;
 					toAdd.push(street);
-				}
-			case 'mall':
-				{
-					camZoom = 0.80;
-
-					var bg:FlxSprite = new FlxSprite(-1000, -500).loadGraphic(Paths.loadImage('christmas/bgWalls', 'week5'));
-					bg.antialiasing = FlxG.save.data.antialiasing;
-					bg.scrollFactor.set(0.2, 0.2);
-					bg.active = false;
-					bg.setGraphicSize(Std.int(bg.width * 0.8));
-					bg.updateHitbox();
-					swagBacks['bg'] = bg;
-					toAdd.push(bg);
-
-					var upperBoppers = new FlxSprite(-240, -90);
-					upperBoppers.frames = Paths.getSparrowAtlas('christmas/upperBop', 'week5');
-					upperBoppers.animation.addByPrefix('idle', "Upper Crowd Bob", 24, false);
-					upperBoppers.antialiasing = FlxG.save.data.antialiasing;
-					upperBoppers.scrollFactor.set(0.33, 0.33);
-					upperBoppers.setGraphicSize(Std.int(upperBoppers.width * 0.85));
-					upperBoppers.updateHitbox();
-					if (FlxG.save.data.distractions)
-					{
-						swagBacks['upperBoppers'] = upperBoppers;
-						toAdd.push(upperBoppers);
-						animatedBacks.push(upperBoppers);
-					}
-
-					var bgEscalator:FlxSprite = new FlxSprite(-1100, -600).loadGraphic(Paths.loadImage('christmas/bgEscalator', 'week5'));
-					bgEscalator.antialiasing = FlxG.save.data.antialiasing;
-					bgEscalator.scrollFactor.set(0.3, 0.3);
-					bgEscalator.active = false;
-					bgEscalator.setGraphicSize(Std.int(bgEscalator.width * 0.9));
-					bgEscalator.updateHitbox();
-					swagBacks['bgEscalator'] = bgEscalator;
-					toAdd.push(bgEscalator);
-
-					var tree:FlxSprite = new FlxSprite(370, -250).loadGraphic(Paths.loadImage('christmas/christmasTree', 'week5'));
-					tree.antialiasing = FlxG.save.data.antialiasing;
-					tree.scrollFactor.set(0.40, 0.40);
-					swagBacks['tree'] = tree;
-					toAdd.push(tree);
-
-					var bottomBoppers = new FlxSprite(-300, 140);
-					bottomBoppers.frames = Paths.getSparrowAtlas('christmas/bottomBop', 'week5');
-					bottomBoppers.animation.addByPrefix('idle', 'Bottom Level Boppers', 24, false);
-					bottomBoppers.antialiasing = FlxG.save.data.antialiasing;
-					bottomBoppers.scrollFactor.set(0.9, 0.9);
-					bottomBoppers.setGraphicSize(Std.int(bottomBoppers.width * 1));
-					bottomBoppers.updateHitbox();
-					if (FlxG.save.data.distractions)
-					{
-						swagBacks['bottomBoppers'] = bottomBoppers;
-						toAdd.push(bottomBoppers);
-						animatedBacks.push(bottomBoppers);
-					}
-
-					var fgSnow:FlxSprite = new FlxSprite(-600, 700).loadGraphic(Paths.loadImage('christmas/fgSnow', 'week5'));
-					fgSnow.active = false;
-					fgSnow.antialiasing = FlxG.save.data.antialiasing;
-					swagBacks['fgSnow'] = fgSnow;
-					toAdd.push(fgSnow);
-
-					var santa = new FlxSprite(-840, 150);
-					santa.frames = Paths.getSparrowAtlas('christmas/santa', 'week5');
-					santa.animation.addByPrefix('idle', 'santa idle in fear', 24, false);
-					santa.antialiasing = FlxG.save.data.antialiasing;
-					if (FlxG.save.data.distractions)
-					{
-						swagBacks['santa'] = santa;
-						toAdd.push(santa);
-						animatedBacks.push(santa);
-					}
-				}
-			case 'mallEvil':
-				{
-					var bg:FlxSprite = new FlxSprite(-400, -500).loadGraphic(Paths.loadImage('christmas/evilBG', 'week5'));
-					bg.antialiasing = FlxG.save.data.antialiasing;
-					bg.scrollFactor.set(0.2, 0.2);
-					bg.active = false;
-					bg.setGraphicSize(Std.int(bg.width * 0.8));
-					bg.updateHitbox();
-					swagBacks['bg'] = bg;
-					toAdd.push(bg);
-
-					var evilTree:FlxSprite = new FlxSprite(300, -300).loadGraphic(Paths.loadImage('christmas/evilTree', 'week5'));
-					evilTree.antialiasing = FlxG.save.data.antialiasing;
-					evilTree.scrollFactor.set(0.2, 0.2);
-					swagBacks['evilTree'] = evilTree;
-					toAdd.push(evilTree);
-
-					var evilSnow:FlxSprite = new FlxSprite(-200, 700).loadGraphic(Paths.loadImage("christmas/evilSnow", 'week5'));
-					evilSnow.antialiasing = FlxG.save.data.antialiasing;
-					swagBacks['evilSnow'] = evilSnow;
-					toAdd.push(evilSnow);
 				}
 			default:
 				{

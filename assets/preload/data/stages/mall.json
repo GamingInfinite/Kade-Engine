@@ -1,0 +1,93 @@
+{
+  "camZoom": 0.8,
+  "objects": [
+    {
+      "name": "bg",
+      "posX": -1000,
+      "posY": -500,
+      "scrollFactor": [0.2, 0.2],
+      "active": false,
+      "scale": [0.8],
+      "updateHitbox": true,
+      "frames": ["christmas/bgWalls", "week5"]
+    },
+    {
+      "name": "upperBoppers",
+      "posX": -240,
+      "posY": -90,
+      "frames": ["christmas/upperBop", "week5"],
+      "scrollFactor": [0.33, 0.33],
+      "scale": [0.85],
+      "updateHitbox": true,
+      "isDistraction": true,
+      "isAnimated": true,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "Upper Crowd Bob",
+          "fps": 24,
+          "looped": false
+        }
+      ]
+    },
+    {
+      "name": "bgEscalator",
+      "posX": -1100,
+      "posY": -600,
+      "frames": ["christmas/bgEscalator", "week5"],
+      "scrollFactor": [0.3, 0.3],
+      "scale": [0.9],
+      "active": false,
+      "updateHitbox": true
+    },
+    {
+      "name": "tree",
+      "posX": 370,
+      "posY": -250,
+      "scrollFactor": [0.4, 0.4],
+      "frames": ["christmas/christmasTree", "week5"]
+    },
+    {
+      "name": "bottomBoppers",
+      "posX": -300,
+      "posY": 140,
+      "frames": ["christmas/bottomBop", "week5"],
+      "scrollFactor": [0.9, 0.9],
+      "scale": [1],
+      "updateHitbox": true,
+      "isDistraction": true,
+      "isAnimated": true,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "Bottom Level Boppers",
+          "fps": 24,
+          "looped": false
+        }
+      ]
+    },
+    {
+      "name": "fgSnow",
+      "posX": -600,
+      "posY": 700,
+      "frames": ["christmas/fgSnow", "week5"],
+      "active": false
+    },
+    {
+      "name": "santa",
+      "posX": -840,
+      "posY": 150,
+      "frames": ["christmas/santa", "week5"],
+      "isDistraction": true,
+      "isAnimated": true,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "santa idle in fear",
+          "fps": 24,
+          "looped": false
+        }
+      ]
+    }
+  ]
+}
