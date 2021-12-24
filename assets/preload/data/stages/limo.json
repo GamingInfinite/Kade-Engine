@@ -81,5 +81,12 @@
         }
       ]
     }
+  ],
+  "characters": [
+    {
+      "name": "bf-car",
+      "posX": 1030,
+      "posY": 230
+    }
   ]
 }

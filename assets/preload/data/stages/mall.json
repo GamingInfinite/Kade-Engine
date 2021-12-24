@@ -89,5 +89,17 @@
         }
       ]
     }
+  ],
+  "characters": [
+    {
+      "name": "bf-christmas",
+      "posX": 970,
+      "posY": 450
+    },
+    {
+      "name": "parents-christmas",
+      "posX": -400,
+      "posY": 100
+    }
   ]
 }

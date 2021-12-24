@@ -23,5 +23,17 @@
             "posY": 700,
             "frames":["christmas/evilSnow", "week5"]
         }
+    ],
+    "characters": [
+        {
+            "name": "bf-christmas",
+            "posX":1090,
+            "posY":450
+        },
+        {
+            "name": "monster-christmas",
+            "posX":100,
+            "posY":150
+        }
     ]
 }

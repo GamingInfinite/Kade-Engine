@@ -17,5 +17,22 @@
         }
       ]
     }
+  ],
+  "characters": [
+    {
+      "name": "gf-pixel",
+      "posX":580,
+      "posY":430
+    },
+    {
+      "name": "bf-pixel",
+      "posX":970,
+      "posY":670
+    },
+    {
+      "name": "spirit",
+      "posX":-50,
+      "posY":200
+    }
   ]
 }

@@ -111,5 +111,27 @@
         }
       ]
     }
+  ],
+  "characters":[
+    {
+      "name": "senpai",
+      "posX":250,
+      "posY":460
+    },
+    {
+      "name": "senpai-angry",
+      "posX":250,
+      "posY":460
+    },
+    {
+      "name": "gf-pixel",
+      "posX":580,
+      "posY":430
+    },
+    {
+      "name": "bf-pixel",
+      "posX":970,
+      "posY":670
+    }
   ]
 }

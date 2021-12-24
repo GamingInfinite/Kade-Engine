@@ -82,7 +82,7 @@ class Stage extends MusicBeatState
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
 	// All of the above must be set or used in your stage case code block!!
-	public var positions:Map<String, Map<String, Array<Int>>> = new Map<String, Map<String, Array<Int>>>();
+	public var positions:Map<String, Map<String, Array<Int>>> = ['philly' => ['pico' => [100, 400]]];
 
 	public function generateStageObject(stageData:StageData, stageObjects:Array<StageObject>, ?groupToAdd:FlxTypedGroup<FlxSprite>)
 	{
