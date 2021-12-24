@@ -13,6 +13,7 @@ import flixel.tweens.FlxTween;
 typedef StageData =
 {
 	var objects:Array<StageObject>;
+	var characters:Array<CharacterPos>;
 	var ?camZoom:Float;
 }
 
@@ -52,6 +53,13 @@ typedef ObjectAnim =
 	var ?song:String;
 }
 
+typedef CharacterPos =
+{
+	var name:String;
+	var posX:Int;
+	var posY:Int;
+}
+
 class Stage extends MusicBeatState
 {
 	public var curStage:String = '';
@@ -74,21 +82,7 @@ class Stage extends MusicBeatState
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
 	// All of the above must be set or used in your stage case code block!!
-	public var positions:Map<String, Map<String, Array<Int>>> = [
-		// Assign your characters positions on stage here!
-		'halloween' => ['spooky' => [100, 300], 'monster' => [100, 200]],
-		'philly' => ['pico' => [100, 400]],
-		'limo' => ['bf-car' => [1030, 230]],
-		'mall' => ['bf-christmas' => [970, 450], 'parents-christmas' => [-400, 100]],
-		'mallEvil' => ['bf-christmas' => [1090, 450], 'monster-christmas' => [100, 150]],
-		'school' => [
-			'gf-pixel' => [580, 430],
-			'bf-pixel' => [970, 670],
-			'senpai' => [250, 460],
-			'senpai-angry' => [250, 460]
-		],
-		'schoolEvil' => ['gf-pixel' => [580, 430], 'bf-pixel' => [970, 670], 'spirit' => [-50, 200]]
-	];
+	public var positions:Map<String, Map<String, Array<Int>>> = new Map<String, Map<String, Array<Int>>>();
 
 	public function generateStageObject(stageData:StageData, stageObjects:Array<StageObject>, ?groupToAdd:FlxTypedGroup<FlxSprite>)
 	{
@@ -96,6 +90,23 @@ class Stage extends MusicBeatState
 		{
 			camZoom = stageData.camZoom;
 		}
+
+		if (!(curStage == "stage"))
+		{
+			if (!positions.exists(curStage))
+			{
+				var charPosMap = new Map<String, Array<Int>>();
+				for (i in 0...stageData.characters.length)
+				{
+					var name = stageData.characters[i].name;
+					var posX = stageData.characters[i].posX;
+					var posY = stageData.characters[i].posY;
+					charPosMap[name] = [posX, posY];
+				}
+				positions[curStage] = charPosMap;
+			}
+		}
+
 		for (i in 0...stageObjects.length)
 		{
 			var obj = new FlxSprite(stageObjects[i].posX, stageObjects[i].posY);
@@ -531,17 +542,20 @@ class Stage extends MusicBeatState
 			{
 				dance(!danceDir);
 
-				swagGroup['dancers'].forEach(function(dancer:FlxSprite)
+				if (swagGroup.exists("dancers"))
 				{
-					if (danceDir)
+					swagGroup['dancers'].forEach(function(dancer:FlxSprite)
 					{
-						dancer.animation.play('danceRight', true);
-					}
-					else
-					{
-						dancer.animation.play('danceLeft', true);
-					}
-				});
+						if (danceDir)
+						{
+							dancer.animation.play('danceRight', true);
+						}
+						else
+						{
+							dancer.animation.play('danceLeft', true);
+						}
+					});
+				}
 			}
 		}
 	}

@@ -1,4 +1,3 @@
-1.2.0;
-- CUSTOM STAGES!!!!!
-- Per Character hpicon assignment
-- Uhhh, more drinks I guess
+1.2.1;
+- small bugfix that broke all stages
+- made it where you can/have to assign character positions in a stage
