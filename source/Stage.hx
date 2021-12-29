@@ -56,8 +56,8 @@ typedef ObjectAnim =
 typedef CharacterPos =
 {
 	var name:String;
-	var posX:Int;
-	var posY:Int;
+	var posX:Float;
+	var posY:Float;
 }
 
 class Stage extends MusicBeatState
@@ -82,11 +82,11 @@ class Stage extends MusicBeatState
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
 	// BGs still must be added by using toAdd Array for them to show in game after slowBacks take effect!!
 	// All of the above must be set or used in your stage case code block!!
-	public var positions:Map<String, Map<String, Array<Int>>> = ['philly' => ['pico' => [100, 400]]];
+	public var positions:Map<String, Map<String, Array<Float>>> = ['philly' => ['pico' => [100, 400]]];
 
 	public function generateStageObject(stageData:StageData, stageObjects:Array<StageObject>, ?groupToAdd:FlxTypedGroup<FlxSprite>)
 	{
-		if (stageData.camZoom != null && camZoom != 1.05)
+		if (stageData.camZoom != null)
 		{
 			camZoom = stageData.camZoom;
 		}
@@ -95,7 +95,7 @@ class Stage extends MusicBeatState
 		{
 			if (!positions.exists(curStage))
 			{
-				var charPosMap = new Map<String, Array<Int>>();
+				var charPosMap = new Map<String, Array<Float>>();
 				for (i in 0...stageData.characters.length)
 				{
 					var name = stageData.characters[i].name;

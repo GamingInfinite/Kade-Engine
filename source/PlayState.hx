@@ -563,7 +563,6 @@ class PlayState extends MusicBeatState
 
 		if (!stageTesting)
 			Stage = new Stage(SONG.stage);
-
 		var positions = Stage.positions[Stage.curStage];
 		if (positions != null && !stageTesting)
 		{
@@ -848,7 +847,7 @@ class PlayState extends MusicBeatState
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
-
+		Debug.logInfo("Checkpoint HP");
 		// Add Kade Engine watermark
 		kadeEngineWatermark = new FlxText(4, healthBarBG.y
 			+ 50, 0,
@@ -930,6 +929,8 @@ class PlayState extends MusicBeatState
 			else
 				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 		}
+
+		Debug.logInfo("Checkpoint Icons");
 
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -1014,6 +1015,7 @@ class PlayState extends MusicBeatState
 		FlxG.keys.preventDefaultKeys = [];
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, handleInput);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, releaseInput);
+		Debug.logInfo("Checkpoint END");
 		super.create();
 	}
 
