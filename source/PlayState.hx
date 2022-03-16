@@ -1998,7 +1998,7 @@ class PlayState extends MusicBeatState
 
 	public var updateFrame = 0;
 
-	public var pastScrollChanges:Array<Song.Event> = [];
+	public var pastChanges:Array<Song.Event> = [];
 
 	var currentLuaIndex = 0;
 
@@ -2125,6 +2125,7 @@ class PlayState extends MusicBeatState
 				if (timingSegBpm != Conductor.bpm)
 				{
 					trace("BPM CHANGE to " + timingSegBpm);
+					Debug.logInfo("BPM Change to " + timingSegBpm);
 					Conductor.changeBPM(timingSegBpm, false);
 					Conductor.crochet = ((60 / (timingSegBpm) * 1000)) / songMultiplier;
 					Conductor.stepCrochet = Conductor.crochet / 4;
@@ -2138,11 +2139,21 @@ class PlayState extends MusicBeatState
 				switch (i.type)
 				{
 					case "Scroll Speed Change":
-						if (i.position <= curDecimalBeat && !pastScrollChanges.contains(i))
+						if (i.position <= curDecimalBeat && !pastChanges.contains(i))
 						{
-							pastScrollChanges.push(i);
+							pastChanges.push(i);
 							trace("SCROLL SPEED CHANGE to " + i.value);
 							newScroll = i.value;
+						}
+					case "BPM Change":
+						if (i.position <= curDecimalBeat && !pastChanges.contains(i))
+						{
+							trace("BPM CHANGE to " + i.value);
+							Debug.logInfo("BPM Change to " + i.value);
+							pastChanges.push(i);
+							Conductor.changeBPM(i.value, false);
+							Conductor.crochet = ((60 / (i.value) * 1000)) / songMultiplier;
+							Conductor.stepCrochet = Conductor.crochet / 4;
 						}
 				}
 			}
