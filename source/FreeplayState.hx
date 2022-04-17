@@ -539,6 +539,10 @@ class FreeplayState extends MusicBeatState
 		{
 			changeDiff();
 		}
+		else if (songs[curSelected].diffs != possibleDiffs)
+		{
+			changeDiff();
+		}
 		// ^ Never ask the story behind this code.  Ever
 
 		// adjusting the highscore song name to be compatible (changeSelection)
