@@ -12,6 +12,8 @@
 
 # Friday Night Funkin': Void Engine
 
+## As of 2023, this engine has been abandonded.  Go use Psych Engine or smthn Idk
+
 **Friday Night Funkin'** is a rhythm game originally made for Ludum Dare 47 "Stuck In a Loop".
 
 Links: **[itch.io page](https://ninja-muffin24.itch.io/funkin) ⋅ [Newgrounds](https://www.newgrounds.com/portal/view/770371) ⋅ [source code on GitHub](https://github.com/ninjamuffin99/Funkin)**
